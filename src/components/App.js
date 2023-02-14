@@ -9,7 +9,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
-import auth from "../utils/auth";
+import authorization from "../utils/authorization";
 import Register from "./Register";
 import Login from "./Login";
 import ProtectedRoute from "./ProtectedRoute";
@@ -157,7 +157,7 @@ function App() {
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      auth
+      authorization
         .checkToken(token)
         .then((res) => {
           setEmail(res.data.email);

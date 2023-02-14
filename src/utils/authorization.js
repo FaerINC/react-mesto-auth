@@ -1,4 +1,4 @@
-class Auth {
+class Authorization {
   constructor(baseUrl) {
     this._baseUrl = baseUrl;
   }
@@ -58,6 +58,6 @@ class Auth {
   }
 }
 
-const auth = new Auth("https://auth.nomoreparties.co");
+const authorization = new Authorization("https://auth.nomoreparties.co");
 
-export default auth;
+export default authorization;

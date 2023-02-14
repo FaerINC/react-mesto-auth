@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
-import auth from "../utils/auth";
+import authorization from "../utils/authorization";
 
 export default function Register({ handleShowInfoMessage }) {
   const [inputs, setInputs] = React.useState({
@@ -19,7 +19,7 @@ export default function Register({ handleShowInfoMessage }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    auth
+    authorization
       .register(inputs)
       .then((res) => {
         handleShowInfoMessage({

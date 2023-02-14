@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
-import auth from "../utils/auth";
+import authorization from "../utils/authorization";
 
 export default function Login({ handleShowInfoMessage, onLogin, setEmail }) {
   const [inputs, setInputs] = React.useState({
@@ -20,7 +20,7 @@ export default function Login({ handleShowInfoMessage, onLogin, setEmail }) {
   function handleSubmit(event) {
     event.preventDefault();
     setEmail(inputs.email);
-    auth
+    authorization
       .authorize(inputs)
       .then((res) => {
         if (res.token) localStorage.setItem("token", res.token);
