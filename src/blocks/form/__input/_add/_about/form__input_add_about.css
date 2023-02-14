@@ -1,0 +1,14 @@
+.form__input_add_about {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 29px;
+  margin-bottom: 0px;
+}
+
+@media screen and (max-width: 450px) {
+  .form__input_add_about {
+    margin-bottom: 5px;
+    padding-bottom: 9px;
+    width: 238px;
+  }
+}

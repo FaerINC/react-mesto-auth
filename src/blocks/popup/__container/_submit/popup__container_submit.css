@@ -1,0 +1,12 @@
+.popup__container_submit {
+    height: 181px;
+  width: 430px;
+}
+
+@media screen and (max-width: 450px) {
+  .popup__container_submit {
+    width: 282px;
+    max-height: 322px;
+    padding: 25px 22px 10px;
+  }
+}

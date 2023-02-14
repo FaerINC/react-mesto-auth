@@ -1,0 +1,7 @@
+.register__form_input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  color: aliceblue;
+}

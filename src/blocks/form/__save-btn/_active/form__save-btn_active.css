@@ -1,0 +1,6 @@
+.form__save-btn_active {
+  cursor: pointer;
+  background: #000000;
+  color: #ffffff;
+  opacity: 1;
+}

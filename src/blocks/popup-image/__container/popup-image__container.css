@@ -1,0 +1,15 @@
+.popup-image__container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 90px;
+}
+
+@media screen and (max-width: 600px) {
+  .popup-image__container {
+    margin: 35% auto;
+  }
+}

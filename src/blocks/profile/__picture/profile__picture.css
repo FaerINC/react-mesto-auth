@@ -1,0 +1,21 @@
+.profile__picture {
+  height: 120px;
+  position: relative;
+  width: max-content;
+}
+
+.profile__picture:hover .overlay-pencil {
+  display: block;
+}
+
+.profile__picture:hover .profile__pencil {
+  display: inline;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__picture {
+    margin-bottom: 22.25px;
+    margin-right: 0;
+    align-self: center;
+  }
+}
