@@ -31,21 +31,23 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    apiNew
-      .getUserInformation()
-      .then(setCurrentUser)
-      .catch((err) => {
-        console.log(err);
-      });
+    if (loggedIn) {
+      apiNew
+        .getUserInformation()
+        .then(setCurrentUser)
+        .catch((err) => {
+          console.log(err);
+        });
 
-    apiNew
-      .getAllCards()
-      .then((cards) => {
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      apiNew
+        .getAllCards()
+        .then((cards) => {
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [loggedIn]);
 
   function openEditProfile() {
