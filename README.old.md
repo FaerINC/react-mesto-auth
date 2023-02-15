@@ -1,3 +1,0 @@
-# mesto-react
-
-OLD

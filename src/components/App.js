@@ -20,13 +20,13 @@ function App() {
   const [isAvatarPopupOpen, setIsAvatarPopupOpen] = useState(false);
   const [isCardsPopupOpen, setIsCardsPopupOpen] = useState(false);
   const [selectedCard, setIsSelectedCard] = useState(null);
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
   //authorization
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [infoMessage, setInfoMessage] = React.useState(null);
-  const [email, setEmail] = React.useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [infoMessage, setInfoMessage] = useState(null);
+  const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [loggedIn]);
 
   function openEditProfile() {
     setIsEditProfilePopupOpen(true);
@@ -154,7 +154,7 @@ function App() {
   }
 
   //работа с токеном
-  React.useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       authorization
@@ -170,8 +170,40 @@ function App() {
     }
   }, [navigate]);
 
-  function handleLogin() {
+  function handleLogin(inputs) {
     setLoggedIn(true);
+    authorization
+      .authorize(inputs)
+      .then((res) => {
+        if (res.token) localStorage.setItem("token", res.token);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        handleShowInfoMessage({
+          text: "Что-то пошло не так! Попробуйте еще раз.",
+          isSuccess: false,
+        });
+      });
+  }
+
+  function handleRegister(inputs) {
+    authorization
+      .register(inputs)
+      .then(() => {
+        handleShowInfoMessage({
+          text: "Вы успешно зарегистрировались!",
+          isSuccess: true,
+        });
+        navigate("/sign-in");
+      })
+      .catch((err) => {
+        console.log(err);
+        handleShowInfoMessage({
+          text: "Что-то пошло не так! Попробуйте еще раз.",
+          isSuccess: false,
+        });
+      });
   }
 
   function handleLogout() {
@@ -209,19 +241,11 @@ function App() {
             />
             <Route
               path="/sign-in"
-              element={
-                <Login
-                  onLogin={handleLogin}
-                  handleShowInfoMessage={handleShowInfoMessage}
-                  setEmail={setEmail}
-                />
-              }
+              element={<Login onLogin={handleLogin} setEmail={setEmail} />}
             />
             <Route
               path="/sign-up"
-              element={
-                <Register handleShowInfoMessage={handleShowInfoMessage} />
-              }
+              element={<Register onRegister={handleRegister} />}
             />
             <Route
               path="*"

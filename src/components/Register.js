@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import Header from "./Header";
-import authorization from "../utils/authorization";
 
-export default function Register({ handleShowInfoMessage }) {
+export default function Register({ onRegister }) {
   const [inputs, setInputs] = React.useState({
     email: "",
     password: "",
   });
-
-  const navigate = useNavigate();
 
   function handleChange(event) {
     const value = event.target.value;
@@ -19,24 +16,8 @@ export default function Register({ handleShowInfoMessage }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    authorization
-      .register(inputs)
-      .then((res) => {
-        handleShowInfoMessage({
-          text: "Вы успешно зарегистрировались!",
-          isSuccess: true,
-        });
-        resetForm();
-        navigate("/sign-in");
-      })
-      .catch((err) => {
-        console.log(err);
-        const text = "Что-то пошло не так! Попробуйте еще раз.";
-        handleShowInfoMessage({
-          text: text,
-          isSuccess: false,
-        });
-      });
+    onRegister(inputs);
+    resetForm();
   }
 
   function resetForm() {

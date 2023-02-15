@@ -1,15 +1,12 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Header from "./Header";
-import authorization from "../utils/authorization";
 
-export default function Login({ handleShowInfoMessage, onLogin, setEmail }) {
+export default function Login({ onLogin, setEmail }) {
   const [inputs, setInputs] = React.useState({
     email: "",
     password: "",
   });
-
-  const navigate = useNavigate();
 
   function handleChange(event) {
     const value = event.target.value;
@@ -20,22 +17,8 @@ export default function Login({ handleShowInfoMessage, onLogin, setEmail }) {
   function handleSubmit(event) {
     event.preventDefault();
     setEmail(inputs.email);
-    authorization
-      .authorize(inputs)
-      .then((res) => {
-        if (res.token) localStorage.setItem("token", res.token);
-        resetForm();
-        onLogin();
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        const text = "Что-то пошло не так! Попробуйте еще раз.";
-        handleShowInfoMessage({
-          text: text,
-          isSuccess: false,
-        });
-      });
+    onLogin(inputs);
+    resetForm();
   }
 
   function resetForm() {

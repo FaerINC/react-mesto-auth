@@ -24,12 +24,7 @@ function PopupWithForm(props) {
           className="popup__close-btn opacity"
           type="button"
         ></button>
-        <form
-          onSubmit={props.onSubmit}
-          name={props.name}
-          className="form"
-          noValidate=""
-        >
+        <form onSubmit={props.onSubmit} name={props.name} className="form">
           {props.children}
           <button className="popup__save-btn opacity" type="submit">
             {props.buttonText}
